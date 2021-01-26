@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import FacebookLogin from 'react-facebook-login';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
 export default function RegisterLoginForm() {
     const [isLogin, setIsLogin] = useState(true)
@@ -28,11 +28,19 @@ export default function RegisterLoginForm() {
             <small>{isLogin ? "Don't have an account?" : "Already have an account?"}</small>
             <button onClick={() => setIsLogin(prevLogin => !prevLogin)}>{isLogin ? "Register here" : "Login here"}</button>
             <br/>
-            <FacebookLogin
+            {/* <FacebookLogin
             appId="130214035599288"
             autoLoad={true}
             fields="name,email,picture"
-            callback={responseFacebook} />
+            callback={responseFacebook} /> */}
+                <FacebookLogin
+                    appId="130214035599288"
+                    autoLoad
+                    callback={responseFacebook}
+                    render={renderProps => (
+                        <button onClick={renderProps.onClick}>Sign in with Facebook</button>
+                    )}
+                />
         </div>
     )
 }
