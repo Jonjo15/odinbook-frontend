@@ -10,9 +10,31 @@ export default function RegisterLoginForm() {
     const responseFacebook = (response) => {
         console.log(response)
     }
+
+    const handleSubmit = e => {
+        e.preventDefault()
+        if (isLogin) {
+            //TODO: SUBMIT WITH LOGIN AND PASSWORD
+            const obj ={
+                email,
+                password
+            }
+            console.log(obj)
+        }
+        else {
+            const obj = {
+                email,
+                password,
+                first_name: firstName,
+                family_name: familyName
+            }
+            console.log(obj)
+            //TODO: SUBMIT WITH LOGIN PASSWORD, FIRSTNAME, FAMILYNAME
+        }
+    }
     return (
-        <div>
-            <form>
+        <div className="form-container">
+            <form className="reg-log-form" onSubmit={handleSubmit}>
                 <label htmlFor="title">Email: </label>
                 <input onChange={(e) => setEmail(e.target.value)} id="email" name="email" type="text" value={email}/>
                 <label htmlFor="title">Password: </label>

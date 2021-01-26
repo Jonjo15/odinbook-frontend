@@ -3,7 +3,7 @@ import RegisterLoginForm from '../components/RegisterLoginForm'
 
 export default function Auth() {
     return (
-        <div>
+        <div className="container">
             <h1>Auth Page</h1>
             <RegisterLoginForm/>
         </div>
