@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import FacebookLogin from 'react-facebook-login';
 
 export default function RegisterLoginForm() {
     const [isLogin, setIsLogin] = useState(true)
@@ -6,6 +7,9 @@ export default function RegisterLoginForm() {
     const [password, setPassword] = useState("")
     const [firstName, setFirstName] = useState("")
     const [familyName, setFamilyName] = useState("")
+    const responseFacebook = (response) => {
+        console.log(response)
+    }
     return (
         <div>
             <form>
@@ -23,6 +27,12 @@ export default function RegisterLoginForm() {
             </form> 
             <small>{isLogin ? "Don't have an account?" : "Already have an account?"}</small>
             <button onClick={() => setIsLogin(prevLogin => !prevLogin)}>{isLogin ? "Register here" : "Login here"}</button>
+            <br/>
+            <FacebookLogin
+            appId="130214035599288"
+            autoLoad={true}
+            fields="name,email,picture"
+            callback={responseFacebook} />
         </div>
     )
 }
