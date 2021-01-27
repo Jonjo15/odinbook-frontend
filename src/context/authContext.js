@@ -2,7 +2,7 @@ import { useEffect, useContext, useReducer, createContext} from "react"
 import authReducer from "./authReducer"
 import {FINISH_LOADING, LOADING_USER, LOG_OUT, SET_USER} from "./types"
 import axios from "axios"
-import {useHistory} from "react-router-dom"
+// import {useHistory} from "react-router-dom"
 const AuthContext = createContext();
 
 export function useAuth() {
@@ -19,7 +19,6 @@ export const initialState = {
 };
 
 export function AuthProvider({children}) {
-    const history = useHistory()
     const [state, dispatch] = useReducer(authReducer, initialState)
     useEffect(() => {
         dispatch({type: FINISH_LOADING})
@@ -54,10 +53,10 @@ export function AuthProvider({children}) {
         dispatch({type: LOADING_USER})
         try {
             //TODO: FINISH AND TEST IT OUT
-            const res = await axios.post("http://localhost:5000/auth/facebook/token")
+            const res = await axios.post("http://localhost:5000/auth/facebook/token", data)
             dispatch({type: SET_USER, payload: res.data})
         } catch (error) {
-            console.error(err)
+            console.error(error)
         }
     }
     const value = {

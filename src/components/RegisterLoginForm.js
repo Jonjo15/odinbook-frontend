@@ -3,14 +3,19 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 import { useAuth } from '../context/authContext'
 
 export default function RegisterLoginForm() {
-    const {login, register} = useAuth()
+    const {login, register, fbSignIn} = useAuth()
     const [isLogin, setIsLogin] = useState(true)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [firstName, setFirstName] = useState("")
     const [familyName, setFamilyName] = useState("")
-    const responseFacebook = (response) => {
-        console.log(response)
+    const responseFacebook = async(response) => {
+        console.log(response.accessToken)
+        try {
+            await fbSignIn({access_token: response.accessToken})
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     const handleSubmit = async e => {
