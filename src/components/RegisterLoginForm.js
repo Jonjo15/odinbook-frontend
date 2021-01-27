@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { useAuth } from '../context/authContext'
 
 export default function RegisterLoginForm() {
+    const {login, register} = useAuth()
     const [isLogin, setIsLogin] = useState(true)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -11,7 +13,7 @@ export default function RegisterLoginForm() {
         console.log(response)
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault()
         if (isLogin) {
             //TODO: SUBMIT WITH LOGIN AND PASSWORD
@@ -19,7 +21,12 @@ export default function RegisterLoginForm() {
                 email,
                 password
             }
-            console.log(obj)
+            try {
+                await login(obj)
+
+            } catch (err) {
+                console.error(err)
+            }
         }
         else {
             const obj = {
@@ -28,7 +35,12 @@ export default function RegisterLoginForm() {
                 first_name: firstName,
                 family_name: familyName
             }
-            console.log(obj)
+            try {
+                await register(obj)
+            }
+            catch(err) {
+                console.error(err)
+            }
             //TODO: SUBMIT WITH LOGIN PASSWORD, FIRSTNAME, FAMILYNAME
         }
     }
