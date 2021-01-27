@@ -22,6 +22,7 @@ export default function Post({post, setPosts}) {
     }
     return (
         <div className="post-card">
+            
             <h2>{post.creator.first_name}</h2>
             <p>{post.body}</p>
             <small>{dayjs(post.createdAt).fromNow()}</small>
