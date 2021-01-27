@@ -1,13 +1,32 @@
 import React from 'react'
 import dayjs from "dayjs"
+import axios from "axios"
 import { useAuth } from '../context/authContext'
 var relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
 
-export default function Comment({comment}) {
-    const {state: {currentUser}} = useAuth()
-    const handleClick = e => {
-        console.log("delete")
+export default function Comment({comment, setPosts}) {
+    const {state: {currentUser, token}} = useAuth()
+    const handleClick = async e => {
+        console.log(comment)
+        try {
+            axios.defaults.headers.common['Authorization'] = token;
+            const res = await axios.delete("http://localhost:5000/users/comments/" + comment._id)
+            setPosts(prevPosts => {
+                return prevPosts.map(p => {
+                    if (p._id !== comment.post) {
+                        return p
+                    } 
+                    else {
+                        let updComments = p.comments.filter(c => c._id !== comment._id)
+                        return {...p, comments: updComments}
+                    }
+                })
+            })
+            console.log(res.data)
+        } catch (error) {
+            
+        }
     }
     return (
         <div className="comment-card">
