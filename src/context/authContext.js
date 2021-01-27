@@ -50,13 +50,23 @@ export function AuthProvider({children}) {
     const logout = () => {
         dispatch({type: LOG_OUT})
     }
-
+    const fbSignIn = async(data) => {
+        dispatch({type: LOADING_USER})
+        try {
+            //TODO: FINISH AND TEST IT OUT
+            const res = await axios.post("http://localhost:5000/auth/facebook/token")
+            dispatch({type: SET_USER, payload: res.data})
+        } catch (error) {
+            console.error(err)
+        }
+    }
     const value = {
       state,
       dispatch, 
       register, 
       login,
-      logout
+      logout, 
+      fbSignIn
     }
       return (
           <AuthContext.Provider value={value}>
