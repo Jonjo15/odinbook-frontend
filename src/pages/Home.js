@@ -23,7 +23,7 @@ export default function Home() {
             <h1>Home Page</h1>
             <p>.....{JSON.stringify(currentUser)}</p>
             <p>{JSON.stringify(token)}</p>
-            {posts.map(post => <Post key={post._id} post={post}/>)}
+            {posts.map(post => <Post key={post._id} post={post} setPosts={setPosts}/>)}
             {error && <p>{error}</p>}
         </div>
     ) : <Redirect to="/"/>

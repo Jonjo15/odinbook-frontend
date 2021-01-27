@@ -16,7 +16,7 @@ export default function Comment({comment}) {
             <small>{dayjs(comment.createdAt).fromNow()}</small>
             {/* <p>{currentUser.id}</p>
             <p>{comment.creator._id}</p> */}
-            {currentUser.id === comment.creator._id ? (<button onClick={handleClick}>delete</button>): null}
+            {currentUser._id === comment.creator._id ? (<button onClick={handleClick}>delete</button>): null}
         </div>
     )
 }
