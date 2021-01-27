@@ -1,6 +1,6 @@
 import {SET_AUTHENTICATED, SET_UNAUTHENTICATED, LOADING_USER, SET_USER, FINISH_LOADING} from "./types"
 
-export default function appReducer (state, action){
+export default function authReducer (state, action){
     switch(action.type) {
         case SET_UNAUTHENTICATED:
             return {

@@ -1,5 +1,5 @@
 import { useEffect, useContext, useReducer, createContext} from "react"
-import appReducer from "./appReducer"
+import authReducer from "./authReducer"
 import {FINISH_LOADING} from "./types"
 // import axios from "axios"
 const AuthContext = createContext();
@@ -17,7 +17,7 @@ const initialState = {
 };
 
 export function AuthProvider({children}) {
-    const [state, dispatch] = useReducer(appReducer, initialState)
+    const [state, dispatch] = useReducer(authReducer, initialState)
     useEffect(() => {
         dispatch({type: FINISH_LOADING})
     }, [])
