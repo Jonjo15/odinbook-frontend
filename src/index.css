@@ -6,7 +6,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+* {
+  box-sizing: border-box;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -34,4 +36,30 @@ code {
 .reg-log-form label {
   text-align: left;
   padding: 10px 0px;
+}
+.post-card {
+  border: 1px solid black;
+  border-radius: 15px;
+  margin: 0 auto;
+  padding: 5px 15px;
+  margin-bottom: 20px;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  max-width: 720px;
+  background-color: rgb(174, 255, 255);
+}
+.comment-card {
+  border: 1px solid grey;
+  border-radius: 15px;
+  padding: 4px 12px;
+  width: 100%;
+  background-color: rgb(255, 215, 235);
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  min-height: 7vh;
+  font-size: 0.9rem;
+  margin-top: 20px;
 }
