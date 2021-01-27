@@ -69,7 +69,6 @@ export default function RegisterLoginForm() {
             callback={responseFacebook} /> */}
                 <FacebookLogin
                     appId="130214035599288"
-                    autoLoad
                     callback={responseFacebook}
                     render={renderProps => (
                         <button onClick={renderProps.onClick}>Sign in with Facebook</button>

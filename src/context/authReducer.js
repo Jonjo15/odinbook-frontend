@@ -34,7 +34,10 @@ export default function authReducer (state, action){
             }
         case LOG_OUT:
             localStorage.removeItem("token")
-            return initialState
+            return {
+                ...initialState, 
+                loading: false
+            }
       default:
         return state;
     }

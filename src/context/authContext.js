@@ -1,6 +1,6 @@
 import { useEffect, useContext, useReducer, createContext} from "react"
 import authReducer from "./authReducer"
-import {FINISH_LOADING, LOADING_USER, SET_USER} from "./types"
+import {FINISH_LOADING, LOADING_USER, LOG_OUT, SET_USER} from "./types"
 import axios from "axios"
 import {useHistory} from "react-router-dom"
 const AuthContext = createContext();
@@ -31,30 +31,32 @@ export function AuthProvider({children}) {
             const res = await axios.post("http://localhost:5000/auth/register", data)
             console.log(res)
             dispatch({type: SET_USER, payload: res.data})
-            history.push("/home")
+            // history.push("/home")
         } catch (error) {
             console.error(error)
         }
     }
-    
     const login = async (data) => {
-        //TODO:
         dispatch({type: LOADING_USER})
         try {
             const res = await axios.post("http://localhost:5000/auth/login", data)
             dispatch({type: SET_USER, payload: res.data})
-            history.push("/home")
+            // history.push("/home")
         }
         catch(err) {
             console.error(err)
         }
+    }
+    const logout = () => {
+        dispatch({type: LOG_OUT})
     }
 
     const value = {
       state,
       dispatch, 
       register, 
-      login
+      login,
+      logout
     }
       return (
           <AuthContext.Provider value={value}>
