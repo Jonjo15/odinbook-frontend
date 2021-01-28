@@ -11,7 +11,7 @@ export default function Comment({comment, setPosts}) {
         console.log(comment)
         try {
             axios.defaults.headers.common['Authorization'] = token;
-            const res = await axios.delete("http://localhost:5000/users/comments/" + comment._id)
+            await axios.delete("http://localhost:5000/users/comments/" + comment._id)
             setPosts(prevPosts => {
                 return prevPosts.map(p => {
                     if (p._id !== comment.post) {
@@ -23,7 +23,6 @@ export default function Comment({comment, setPosts}) {
                     }
                 })
             })
-            console.log(res.data)
         } catch (error) {
             console.error(error)
         }
@@ -32,8 +31,25 @@ export default function Comment({comment, setPosts}) {
     const handleLike = async e =>{
         try {
             axios.defaults.headers.common['Authorization'] = token;
-            const res = await axios.put("http://localhost:5000/users/comments" + comment._id)
-            console.log(res)
+            const res = await axios.put("http://localhost:5000/users/comments/" + comment._id)
+            setPosts(prevPosts => {
+                return prevPosts.map(p => {
+                    if (p._id !== comment.post) {
+                        return p
+                    }
+                    else {
+                        let newComments = p.comments.map(c => {
+                            if (c._id !== comment._id) {
+                                return c
+                            }
+                            else {
+                                return {...c, likes: res.data.updatedComment.likes}
+                            }
+                        })
+                        return {...p, comments: newComments}
+                    }
+                })
+            })
         } catch (error) {
             console.error(error)
         }

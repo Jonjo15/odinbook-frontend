@@ -10,7 +10,7 @@ export default function NewCommentForm({setShowForm, setPosts, postId}) {
         e.preventDefault()
         try {
             axios.defaults.headers.common['Authorization'] = token;
-            const res = await axios.post("http://localhost:5000/users/posts/" + postId)
+            const res = await axios.post("http://localhost:5000/users/posts/" + postId, {body})
             console.log(res)
 
             setPosts(prevPosts => {
