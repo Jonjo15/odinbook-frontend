@@ -14,10 +14,20 @@ export default function Post({post, setPosts}) {
         try {
             axios.defaults.headers.common['Authorization'] = token;
             const res = await axios.delete("http://localhost:5000/users/posts/" + post._id)
-            console.log(res.data)
+            console.log(res)
             setPosts(prevPosts => {
                 return prevPosts.filter(p => p._id !== post._id)
             })
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    const handleLike = async e => {
+        try {
+            axios.defaults.headers.common['Authorization'] = token;
+            const res = await axios.put("http://localhost:5000/users/posts/" + post._id)
+            //TODO: FINISH THIS
+            console.log(res.data)
         } catch (error) {
             console.error(error)
         }
@@ -27,6 +37,8 @@ export default function Post({post, setPosts}) {
             <h2>{post.creator.first_name}</h2>
             <p>{post.body}</p>
             <small>{dayjs(post.createdAt).fromNow()}</small>
+            <button onClick={handleLike}>{post.likes.includes(currentUser._id) ? " Unlike": "Like"}</button>
+            <span>{post.likes.length} {post.likes.length === 1 ? "like": "likes"}</span>
             {/* <p>{currentUser.id}</p>
             <p>{post.creator._id}</p> */}
             {!setShowForm && <button onClick={() => setShowForm(true)}>Add a comment</button>}

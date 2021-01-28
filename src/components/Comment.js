@@ -25,14 +25,27 @@ export default function Comment({comment, setPosts}) {
             })
             console.log(res.data)
         } catch (error) {
-            
+            console.error(error)
         }
     }
+
+    const handleLike = async e =>{
+        try {
+            axios.defaults.headers.common['Authorization'] = token;
+            const res = await axios.put("http://localhost:5000/users/comments" + comment._id)
+            console.log(res)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     return (
         <div className="comment-card">
             <h3>{comment.creator.first_name}</h3>
             <p>{comment.body}</p>
             <small>{dayjs(comment.createdAt).fromNow()}</small>
+            <button onClick={handleLike}>{comment.likes.includes(currentUser._id) ? " Unlike": "Like"}</button>
+            <span>{comment.likes.length} {comment.likes.length === 1 ? "like": "likes"}</span>
             {/* <p>{currentUser.id}</p>
             <p>{comment.creator._id}</p> */}
             {currentUser._id === comment.creator._id ? (<button onClick={handleClick}>delete</button>): null}

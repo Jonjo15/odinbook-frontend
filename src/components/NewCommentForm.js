@@ -14,9 +14,17 @@ export default function NewCommentForm({setShowForm, setPosts, postId}) {
             console.log(res)
 
             setPosts(prevPosts => {
-                return currentUser
-                //TODO: FINISH
-                
+                return prevPosts.map(p => {
+                    if(p._id !== postId) {
+                        return p
+                    }
+                    else {
+                        //TODO: NEED TO TEST THIS OUT
+                        let newComment = {...res.data.comment, creator: currentUser}
+                        let updComments = [newComment, ...p.comments]
+                        return {...p, comments: updComments}
+                    }
+                })                
             })
             setShowForm(false)
         } catch (error) {
