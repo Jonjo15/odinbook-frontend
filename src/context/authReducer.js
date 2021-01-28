@@ -1,4 +1,4 @@
-import {SET_AUTHENTICATED, SET_UNAUTHENTICATED, LOADING_USER, SET_USER, FINISH_LOADING, LOG_OUT} from "./types"
+import {SET_AUTHENTICATED, SET_UNAUTHENTICATED, LOADING_USER, SET_USER, FINISH_LOADING, LOG_OUT, SET_ERRORS} from "./types"
 import {initialState} from "./authContext"
 export default function authReducer (state, action){
     switch(action.type) {
@@ -36,6 +36,12 @@ export default function authReducer (state, action){
             localStorage.removeItem("token")
             return {
                 ...initialState, 
+                loading: false
+            }
+        case SET_ERRORS:
+            return {
+                ...state,
+                error: action.payload.error,
                 loading: false
             }
       default:
