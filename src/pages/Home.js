@@ -13,6 +13,7 @@ export default function Home() {
     const [showForm, setShowForm] = useState(false)
     useEffect(() => {
         axios.defaults.headers.common['Authorization'] = token;
+        console.log(token)
         axios.get("http://localhost:5000/home").then(res => {
             setPosts(res.data.timelinePosts)
         }).catch(err => {
@@ -20,7 +21,7 @@ export default function Home() {
         })
     }, [token])
     return authenticated ? (
-        <div>
+        <div className="container">
             <h1>Home Page</h1>
             <p>.....{JSON.stringify(currentUser)}</p>
             <p>{JSON.stringify(token)}</p>

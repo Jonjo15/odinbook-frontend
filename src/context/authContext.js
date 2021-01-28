@@ -20,8 +20,20 @@ export const initialState = {
 export function AuthProvider({children}) {
     const [state, dispatch] = useReducer(authReducer, initialState)
     useEffect(() => {
-        dispatch({type: FINISH_LOADING})
-    }, [])
+        if (!state.token) {
+            dispatch({type: FINISH_LOADING})
+            return;
+        };
+        //TODO: TEST THIS OUT A BIT
+        axios.defaults.headers.common['Authorization'] = state.token;
+        axios.get("http://localhost:5000/users/me").then(res => {
+            console.log(res.data)
+            dispatch({type: SET_USER, payload: res.data})
+        }).catch(err => {
+            dispatch({type: SET_ERRORS, payload: err})
+            dispatch({type:FINISH_LOADING})
+        })
+    }, [state.token])
 
     const register = async (data) => {
         dispatch({type: LOADING_USER})

@@ -24,12 +24,12 @@ export default function authReducer (state, action){
                 loading: false
             }
         case SET_USER:
-            localStorage.setItem("token", action.payload.token)
+            if (!state.token) localStorage.setItem("token", action.payload.token)
             return {
                 ...state,
                 loading: false,
                 currentUser: action.payload.user,
-                token: action.payload.token,
+                token: action.payload.token || state.token,
                 authenticated: true
             }
         case LOG_OUT:
