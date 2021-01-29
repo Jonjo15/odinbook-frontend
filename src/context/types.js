@@ -5,6 +5,7 @@ export const LOADING_USER = 'LOADING_USER';
 export const FINISH_LOADING= "FINISH_LOADING"
 export const LOG_OUT="LOG_OUT"
 export const MARK_NOTIFICATIONS_READ = 'MARK_NOTIFICATIONS_READ';
+export const UPDATE_USER="UPDATE_USER"
 // UI reducer types
 export const SET_ERRORS = 'SET_ERRORS';
 // export const LOADING_UI = 'LOADING_UI';

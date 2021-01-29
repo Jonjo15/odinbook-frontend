@@ -3,7 +3,7 @@ import { useAuth } from '../context/authContext'
 import axios from "axios"
 
 export default function UserPreview({user, setUsers}) {
-    const {state: {currentUser, token}} = useAuth()
+    const {updateUser, state: {currentUser, token, loading}} = useAuth()
     const [error, setError] = useState(null)
     const handleRequest = async e => {
         e.target.disabled = true;
@@ -26,7 +26,37 @@ export default function UserPreview({user, setUsers}) {
             setError(error.message)
         }
     }
-    const friendStatusMarkup = currentUser._id === user._id ? null : currentUser.friends.includes(user._Id)
+    const handleAccept = async e => {
+        e.target.disabled = true
+        try {
+            axios.defaults.headers.common['Authorization'] = token;
+            const res = await axios.post("http://localhost:5000/requests/" + user._id + "/accept")
+            setUsers(prevUsers => {
+                return prevUsers.map(u => {
+                    if (u._id !== user._id) {
+                        return u
+                    }
+                    else {
+                        return res.data.updAcceptedUser
+                    }
+                })
+            }) 
+            updateUser(res.data.updatedUser)
+                    //TODO: UPDATE USER
+        } catch (error) {
+            console.error(error)
+            setError(error.message)
+        }
+    }
+    const handleDecline = e => {
+        e.target.disabled = true
+    }
+
+    // console.log("c.u.", currentUser)
+    // console.log("u", user)
+    const friendStatusMarkup = currentUser._id === user._id ? null
+     :
+      currentUser.friendRequests.includes(user._id) ? (<><button onClick={handleAccept}>Accept</button><button onClick={handleDecline}>Decline</button></>) : currentUser.friends.includes(user._id)
         ? 
      (<p>Friend</p>)
       :
@@ -34,6 +64,7 @@ export default function UserPreview({user, setUsers}) {
         :
        (<button onClick={handleRequest}>Send a friend request</button>)
     return (
+        loading ? <h1>Loading...</h1> :
         <div className="preview-card">
             {error && <small>{error}</small>}
             <h6>{currentUser._id === user._id ? "You" : (user.first_name + " " + user.family_name)}</h6>

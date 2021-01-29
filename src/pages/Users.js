@@ -10,9 +10,9 @@ export default function Users() {
     const [users, setUsers] = useState([])
     const [error, setError] = useState("")
     const [numUsers, setNumUsers] = useState(10)
-
+    axios.defaults.headers.common['Authorization'] = token;
     useEffect(() => {
-        axios.defaults.headers.common['Authorization'] = token;
+        
         axios.get("http://localhost:5000/users/")
         .then(res => {
             console.log(res.data)
@@ -22,7 +22,7 @@ export default function Users() {
         .catch(err => {
             setError(err.message)
         })
-    },[token])
+    },[])
     //TODO:
     return (
         <div className="container">

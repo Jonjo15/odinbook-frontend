@@ -1,6 +1,6 @@
 import { useEffect, useContext, useReducer, createContext} from "react"
 import authReducer from "./authReducer"
-import {FINISH_LOADING, LOADING_USER, LOG_OUT, SET_ERRORS, SET_USER} from "./types"
+import {FINISH_LOADING, LOADING_USER, LOG_OUT, SET_ERRORS, SET_USER, UPDATE_USER} from "./types"
 import axios from "axios"
 // import {useHistory} from "react-router-dom"
 const AuthContext = createContext();
@@ -19,13 +19,10 @@ export const initialState = {
 
 export function AuthProvider({children}) {
     const [state, dispatch] = useReducer(authReducer, initialState)
+    axios.defaults.headers.common['Authorization'] = state.token;
+
     useEffect(() => {
-        if (!state.token) {
-            dispatch({type: FINISH_LOADING})
-            return;
-        };
         //TODO: TEST THIS OUT A BIT
-        axios.defaults.headers.common['Authorization'] = state.token;
         axios.get("http://localhost:5000/users/me").then(res => {
             console.log(res.data)
             dispatch({type: SET_USER, payload: res.data})
@@ -33,7 +30,7 @@ export function AuthProvider({children}) {
             dispatch({type: SET_ERRORS, payload: err})
             dispatch({type:FINISH_LOADING})
         })
-    }, [state.token])
+    }, [])
 
     const register = async (data) => {
         dispatch({type: LOADING_USER})
@@ -46,6 +43,10 @@ export function AuthProvider({children}) {
             dispatch({type: SET_ERRORS, payload: error})
             console.error(error)
         }
+    }
+    const updateUser = (data) => {
+        dispatch({type: LOADING_USER})
+        dispatch({type: UPDATE_USER, payload: data})
     }
     const login = async (data) => {
         dispatch({type: LOADING_USER})
@@ -78,7 +79,8 @@ export function AuthProvider({children}) {
       register, 
       login,
       logout, 
-      fbSignIn
+      fbSignIn, 
+      updateUser
     }
       return (
           <AuthContext.Provider value={value}>

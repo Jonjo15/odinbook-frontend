@@ -1,4 +1,4 @@
-import {SET_AUTHENTICATED, SET_UNAUTHENTICATED, LOADING_USER, SET_USER, FINISH_LOADING, LOG_OUT, SET_ERRORS} from "./types"
+import {SET_AUTHENTICATED, SET_UNAUTHENTICATED, LOADING_USER, SET_USER, FINISH_LOADING, LOG_OUT, SET_ERRORS, UPDATE_USER} from "./types"
 import {initialState} from "./authContext"
 export default function authReducer (state, action){
     switch(action.type) {
@@ -31,6 +31,12 @@ export default function authReducer (state, action){
                 currentUser: action.payload.user,
                 token: action.payload.token || state.token,
                 authenticated: true
+            }
+        case UPDATE_USER: 
+            return {
+                ...state,
+                currentUser: action.payload,
+                loading: false
             }
         case LOG_OUT:
             localStorage.removeItem("token")
