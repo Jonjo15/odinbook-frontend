@@ -33,7 +33,7 @@ export default function Post({post, setPosts}) {
                         return p
                     }
                     else {
-                        let newPost = {...res.data.updatedPost, creator: p.creator}
+                        let newPost = {...res.data.updatedPost, creator: p.creator, comments: p.comments}
                         return newPost
                     }
                 })
