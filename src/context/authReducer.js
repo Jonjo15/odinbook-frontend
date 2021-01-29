@@ -24,7 +24,7 @@ export default function authReducer (state, action){
                 loading: false
             }
         case SET_USER:
-            if (!state.token) localStorage.setItem("token", action.payload.token)
+            if (action.payload.token) localStorage.setItem("token", action.payload.token)
             return {
                 ...state,
                 loading: false,
