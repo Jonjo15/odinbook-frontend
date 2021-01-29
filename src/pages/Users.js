@@ -31,7 +31,7 @@ export default function Users() {
             {error && <small>{error}</small>}
             {users && users.map((u,i) => {
                 if (i < numUsers) {
-                    return  <UserPreview key={u._id} user={u}/>
+                    return  <UserPreview setUsers={setUsers} key={u._id} user={u}/>
                 }
                 else {
                     return null

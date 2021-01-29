@@ -65,7 +65,6 @@ export function AuthProvider({children}) {
     const fbSignIn = async(data) => {
         dispatch({type: LOADING_USER})
         try {
-            //TODO: FINISH AND TEST IT OUT
             const res = await axios.post("http://localhost:5000/auth/facebook/token", data)
             dispatch({type: SET_USER, payload: res.data})
         } catch (error) {
