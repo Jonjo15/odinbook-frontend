@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import Comment from "./Comment"
 import dayjs from "dayjs"
+import {Link} from "react-router-dom"
 import { useAuth } from '../context/authContext'
 import axios from "axios"
 import NewCommentForm from './NewCommentForm'
@@ -46,7 +47,7 @@ export default function Post({post, setPosts}) {
         <div className="post-card">
             <h2>{post.creator.first_name} {post.creator.family_name}</h2>
             <p>{post.body}</p>
-            <small>{dayjs(post.createdAt).fromNow()}</small>
+            <Link to={"posts/" + post._id}><small>{dayjs(post.createdAt).fromNow()}</small></Link>
             <button onClick={handleLike}>{post.likes.includes(currentUser._id) ? " Unlike": "Like"}</button>
             <span>{post.likes.length} {post.likes.length === 1 ? "like": "likes"}</span>
             {/* <p>{currentUser.id}</p>

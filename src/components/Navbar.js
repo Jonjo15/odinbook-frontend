@@ -7,13 +7,17 @@ export default function Navbar() {
         logout()
     }
     return (
-        <div>
+        authenticated ? (<div>
             <h1>Allahu navbar</h1>
             {currentUser && (<h2>Welcome {currentUser.first_name}</h2>)}
-            {authenticated && <button onClick={handleClick}>Log Out</button>}
-            {authenticated && <Link to="/home">Home</Link>}
-            {authenticated && <Link to="/profile">Profile</Link>}
-            {authenticated && <Link to="/users">Users</Link>}
-        </div>
+            <button onClick={handleClick}>Log Out</button>
+             <Link to="/home">Home</Link>
+             <Link to="/profile">Profile</Link>
+             <Link to="/users">Users</Link>
+        </div>) :
+        (<div>
+            <h1>Allahu navbar</h1>
+        </div>)
+        
     )
 }

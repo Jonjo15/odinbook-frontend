@@ -3,9 +3,10 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 import { useAuth } from '../context/authContext'
 
 export default function RegisterLoginForm() {
-    const {login, register, fbSignIn} = useAuth()
+    const {login, register, fbSignIn, state: {error}} = useAuth()
     const [isLogin, setIsLogin] = useState(true)
     const [email, setEmail] = useState("")
+    // const [error, setError] = useState(null)
     const [password, setPassword] = useState("")
     const [firstName, setFirstName] = useState("")
     const [familyName, setFamilyName] = useState("")
@@ -21,7 +22,6 @@ export default function RegisterLoginForm() {
     const handleSubmit = async e => {
         e.preventDefault()
         if (isLogin) {
-            //TODO: SUBMIT WITH LOGIN AND PASSWORD
             const obj ={
                 email,
                 password
@@ -46,7 +46,6 @@ export default function RegisterLoginForm() {
             catch(err) {
                 console.error(err)
             }
-            //TODO: SUBMIT WITH LOGIN PASSWORD, FIRSTNAME, FAMILYNAME
         }
     }
     return (
@@ -67,11 +66,6 @@ export default function RegisterLoginForm() {
             <small>{isLogin ? "Don't have an account?" : "Already have an account?"}</small>
             <button onClick={() => setIsLogin(prevLogin => !prevLogin)}>{isLogin ? "Register here" : "Login here"}</button>
             <br/>
-            {/* <FacebookLogin
-            appId="130214035599288"
-            autoLoad={true}
-            fields="name,email,picture"
-            callback={responseFacebook} /> */}
                 <FacebookLogin
                     appId="130214035599288"
                     callback={responseFacebook}
@@ -79,6 +73,7 @@ export default function RegisterLoginForm() {
                         <button onClick={renderProps.onClick}>Sign in with Facebook</button>
                     )}
                 />
+            {error && <small>{error}</small>}
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { useAuth } from '../context/authContext'
 import axios from "axios"
+import {Link} from "react-router-dom"
 
 export default function UserPreview({user, setUsers}) {
     const {updateUser, state: {currentUser, token, loading}} = useAuth()
@@ -42,7 +43,6 @@ export default function UserPreview({user, setUsers}) {
                 })
             }) 
             updateUser(res.data.updatedUser)
-                    //TODO: UPDATE USER
         } catch (error) {
             console.error(error)
             setError(error.message)
@@ -75,7 +75,7 @@ export default function UserPreview({user, setUsers}) {
         loading ? <h1>Loading...</h1> :
         <div className="preview-card">
             {error && <small>{error}</small>}
-            <h6>{currentUser._id === user._id ? "You" : (user.first_name + " " + user.family_name)}</h6>
+            <Link to={"/users/"+ user._id}><h6>{currentUser._id === user._id ? "You" : (user.first_name + " " + user.family_name)}</h6></Link>
             {friendStatusMarkup}
         </div>
     )
