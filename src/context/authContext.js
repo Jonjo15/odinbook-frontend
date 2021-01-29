@@ -45,7 +45,6 @@ export function AuthProvider({children}) {
         }
     }
     const updateUser = (data) => {
-        dispatch({type: LOADING_USER})
         dispatch({type: UPDATE_USER, payload: data})
     }
     const login = async (data) => {

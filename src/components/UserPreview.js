@@ -48,8 +48,16 @@ export default function UserPreview({user, setUsers}) {
             setError(error.message)
         }
     }
-    const handleDecline = e => {
+    const handleDecline = async e => {
         e.target.disabled = true
+        try {
+            axios.defaults.headers.common['Authorization'] = token;
+            const res = await axios.post("http://localhost:5000/requests/" + user._id + "/decline")
+            updateUser(res.data.updatedUser)
+        } catch (error) {
+            console.error(error)
+            setError(error.message)
+        }
     }
 
     // console.log("c.u.", currentUser)

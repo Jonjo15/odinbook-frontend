@@ -26,7 +26,6 @@ export default function Post({post, setPosts}) {
         try {
             axios.defaults.headers.common['Authorization'] = token;
             const res = await axios.put("http://localhost:5000/users/posts/" + post._id)
-            //TODO: FINISH THIS
             setPosts(prevPosts => {
                 return prevPosts.map(p => {
                     if (p._id !== post._id) {
