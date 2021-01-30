@@ -2,6 +2,7 @@ import React from 'react'
 import dayjs from "dayjs"
 import axios from "axios"
 import { useAuth } from '../context/authContext'
+import {Button} from "semantic-ui-react"
 var relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
 
@@ -57,14 +58,20 @@ export default function Comment({comment, setPosts}) {
 
     return (
         <div className="comment-card">
-            <h3>{comment.creator.first_name}</h3>
+            <h3>{comment.creator.first_name} {comment.creator.family_name}</h3>
             <p>{comment.body}</p>
             <small>{dayjs(comment.createdAt).fromNow()}</small>
-            <button onClick={handleLike}>{comment.likes.includes(currentUser._id) ? " Unlike": "Like"}</button>
-            <span>{comment.likes.length} {comment.likes.length === 1 ? "like": "likes"}</span>
-            {/* <p>{currentUser.id}</p>
-            <p>{comment.creator._id}</p> */}
-            {currentUser._id === comment.creator._id ? (<button onClick={handleClick}>delete</button>): null}
+            <Button
+            content={comment.likes.includes(currentUser._id) ? " Unlike": "Like"}
+            icon='heart'
+            label={{ as: 'a', basic: true, content: comment.likes.length }}
+            labelPosition='right'
+            onClick={handleLike}
+            />
+            {/* <buton onClick={handleLike}>{comment.likes.includes(currentUser._id) ? " Unlike": "Like"}</button> */}
+            {/* <span>{comment.likes.length} {comment.likes.length === 1 ? "like": "likes"}</span>t */}
+            
+            {currentUser._id === comment.creator._id ? (<Button icon="delete" onClick={handleClick} />): null}
         </div>
     )
 }

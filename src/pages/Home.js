@@ -4,7 +4,7 @@ import axios from "axios";
 import {Redirect} from "react-router-dom"
 import Post from "../components/Post"
 import NewPostForm from '../components/NewPostForm';
-
+import {Button} from "semantic-ui-react"
 
 export default function Home() {
     const {state: {authenticated, currentUser, token}} = useAuth()
@@ -24,8 +24,7 @@ export default function Home() {
         <div className="container">
             <h1>Home Page</h1>
             <p>.....{JSON.stringify(currentUser)}</p>
-            <p>{JSON.stringify(token)}</p>
-            {!showForm && <button onClick={() => setShowForm(true)}>Add a new Post</button>}
+            {!showForm && <Button icon="add" onClick={() => setShowForm(true)} />}
             {showForm && <NewPostForm setPosts={setPosts} setShowForm={setShowForm}/>}
             {posts.map(post => <Post key={post._id} post={post} setPosts={setPosts}/>)}
             {error && <p>{error}</p>}

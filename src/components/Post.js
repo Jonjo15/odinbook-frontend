@@ -3,6 +3,7 @@ import Comment from "./Comment"
 import dayjs from "dayjs"
 import {Link} from "react-router-dom"
 import { useAuth } from '../context/authContext'
+import {Button} from "semantic-ui-react"
 import axios from "axios"
 import NewCommentForm from './NewCommentForm'
 var relativeTime = require('dayjs/plugin/relativeTime')
@@ -48,13 +49,24 @@ export default function Post({post, setPosts}) {
             <h2>{post.creator.first_name} {post.creator.family_name}</h2>
             <p>{post.body}</p>
             <Link to={"posts/" + post._id}><small>{dayjs(post.createdAt).fromNow()}</small></Link>
-            <button onClick={handleLike}>{post.likes.includes(currentUser._id) ? " Unlike": "Like"}</button>
-            <span>{post.likes.length} {post.likes.length === 1 ? "like": "likes"}</span>
+            <Button
+            content={post.likes.includes(currentUser._id) ? " Unlike": "Like"}
+            icon='heart'
+            label={{ as: 'a', basic: true, content: post.likes.length }}
+            labelPosition='right'
+            onClick={handleLike}
+            />
+            {/* <button onClick={handleLike}>{post.likes.includes(currentUser._id) ? " Unlike": "Like"}</button> */}
+            {/* <span>{post.likes.length} {post.likes.length === 1 ? "like": "likes"}</span> */}
             {/* <p>{currentUser.id}</p>
             <p>{post.creator._id}</p> */}
-            {!showForm && (<button onClick={() => setShowForm(true)}>Add a comment</button>)}
+            {/* button onClick={() => setShowForm(true)}>Add a comment</button> */}
+            {!showForm && (<Button 
+                icon="comments"
+                onClick={() => setShowForm(true)}
+            />)}
             {showForm && <NewCommentForm setPosts={setPosts} setShowForm={setShowForm} postId={post._id}/>}
-            {currentUser._id === post.creator._id ? (<button onClick={handleClick}>delete</button>): null}
+            {currentUser._id === post.creator._id ? (<Button icon="delete" onClick={handleClick}/>): null}
             {post.comments.map(com => <Comment key={com._id} comment={com} setPosts={setPosts}/>)}
         </div>
     )

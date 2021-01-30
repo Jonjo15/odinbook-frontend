@@ -13,16 +13,21 @@ export default function Notifications() {
 
     useEffect(() => {
         axios.get("http://localhost:5000/notifications").then(res => {
-        //TODO: NOTIFICATIONS API FIX
             setNotifications(res.data.notifications)
         }).catch(err => {
             console.error(err)
             setError(err.message)
         })
     }, [])
+
+    const handleClick = e => {
+        console.log("Remove notificaiton")
+        //TODO: FINISH THIS
+    }
+
     return (
         <div>
-            <Dropdown text='Notifications'>
+            <Dropdown onClick={handleClick} text={(notifications.filter(n => n.seen === false).length).toString()} icon="alarm">
                 <Dropdown.Menu>
                     {notifications.map(n => <Dropdown.Item as={SingleNotification} notification={n}/>)}
                 </Dropdown.Menu>

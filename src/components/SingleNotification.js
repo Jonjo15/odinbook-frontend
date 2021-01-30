@@ -1,9 +1,14 @@
 import React from 'react'
 import {Feed} from "semantic-ui-react"
 import {Link} from "react-router-dom"
+import dayjs from "dayjs"
+var relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
+
 export default function SingleNotification({notification}) {
     let likeContent;
     let route;
+    let icon = notification.type === "comment" ? "pencil" : notification.type === "like" ? "like" : "handshake"
     if (notification.commentId) {
         route = "/posts/" + notification.commentId.post
     }
@@ -26,11 +31,13 @@ export default function SingleNotification({notification}) {
       notification.type ==="accept" ? 
       (notification.sender.first_name + " accepted your request") : (notification.sender.first_name+" liked your " +likeContent)
     return (
-        <Feed>
+        <Feed className="padding">
             <Feed.Event as={Link} to={route}
             //TODO: FINISH
             //TODO: UPDATE NOTIFICAITON ROUTE TO POPULATE CREATOR
-            content={JSON.stringify(notification)}
+            content={content}
+            date={dayjs(notification.createdAt).fromNow()}
+            icon={icon}
             />
         </Feed>
     )
