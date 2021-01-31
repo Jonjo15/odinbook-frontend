@@ -34,7 +34,6 @@ export default function SingleNotification({notification}) {
         <Feed className="padding">
             <Feed.Event as={Link} to={route}
             //TODO: FINISH
-            //TODO: UPDATE NOTIFICAITON ROUTE TO POPULATE CREATOR
             content={content}
             date={dayjs(notification.createdAt).fromNow()}
             icon={icon}

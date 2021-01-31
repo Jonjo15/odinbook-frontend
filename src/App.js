@@ -8,6 +8,7 @@ import SinglePost from "./pages/SinglePost"
 import PrivateRoute from "./components/PrivateRoute"
 import Navbar from "./components/Navbar"
 import {AuthProvider} from "./context/authContext"
+import NotificationsPage from "./pages/NotificationsPage"
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <PrivateRoute exact path="/users" component={Users}/>
             <PrivateRoute path="/users/:userId" component={UserProfile}/>
             <PrivateRoute exact path="/posts/:postId" component={SinglePost}/>
+            <PrivateRoute exact path="/notifications" component={NotificationsPage}/>
         </Switch>
       </BrowserRouter>
     </AuthProvider>
