@@ -20,7 +20,7 @@ export default function NotificationsPage() {
         })
     }, [])
     return (
-        loading ? (<h1>Loading...</h1>) : (<div>
+        loading ? (<h1>Loading...</h1>) : (<div className="container">
             <h1>Your Notifications</h1>
             {error && <p>{error}</p>}
             {notifications.length === 0 ? (<p>You have no notifications yet</p>): (notifications.map(n => <SingleNotification key={n._id} notification={n}/>))}

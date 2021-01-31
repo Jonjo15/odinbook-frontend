@@ -1,5 +1,5 @@
 import React from 'react'
-import {Feed} from "semantic-ui-react"
+import {Feed, Button} from "semantic-ui-react"
 import {Link} from "react-router-dom"
 import dayjs from "dayjs"
 var relativeTime = require('dayjs/plugin/relativeTime')
@@ -31,13 +31,15 @@ export default function SingleNotification({notification}) {
       notification.type ==="accept" ? 
       (notification.sender.first_name + " accepted your request") : (notification.sender.first_name+" liked your " +likeContent)
     return (
+        <div>
         <Feed className="padding">
             <Feed.Event as={Link} to={route}
-            //TODO: FINISH
             content={content}
             date={dayjs(notification.createdAt).fromNow()}
             icon={icon}
             />
         </Feed>
+        {/* <Button content="mark seen"/> */}
+        </div>
     )
 }

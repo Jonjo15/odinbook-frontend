@@ -21,18 +21,30 @@ export default function Notifications() {
         })
     }, [])
 
-    const handleClick = e => {
+    const handleClick =async e => {
         console.log("Remove notificaiton")
-        //TODO: FINISH THIS
+        try {
+            const res = await axios.put("http://localhost:5000/notifications/all")
+            console.log(res)
+            setNotifications(prev => {
+                return prev.map(n => {
+                    n.seen = true;
+                    return n
+                })
+            })
+        } catch (error) {
+            setError("Something went wrong with marking notifications")
+        }
     }
 
     return (
         <div>
-            <Dropdown onClick={handleClick} text={(notifications.filter(n => n.seen === false).length).toString()} icon="alarm">
+            <Dropdown text={(notifications.filter(n => n.seen === false).length).toString()} icon="alarm">
                 <Dropdown.Menu>
-                    {notifications.map(n => <Dropdown.Item as={SingleNotification} notification={n}/>)}
+                    {notifications.map(n => <Dropdown.Item key={n._id} as={SingleNotification} notification={n}/>)}
                     {notifications.length === 0 && <Dropdown.Item text="You have no notifications"/>}
                     {notifications.length < 10 && <Dropdown.Item text="View all notifications" as={Link} to="/notifications"/>}
+                    {notifications.filter(n => n.seen === false).length > 0 && <Dropdown.Item text="Mark all notifications read" onClick={handleClick} />}
                 </Dropdown.Menu>
             </Dropdown>
             {/* {notifications.map(n => <a href="#" key={n._id}>{n._id}</a>)} */}
