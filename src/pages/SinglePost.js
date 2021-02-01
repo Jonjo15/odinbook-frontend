@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import axios from "axios"
 import { useAuth } from '../context/authContext'
 import {useParams} from "react-router-dom"
+import Post from "../components/Post"
+
 export default function SinglePost() {
     const {state: {token}} = useAuth()
     axios.defaults.headers.common["Authorization"] = token;
@@ -20,9 +22,8 @@ export default function SinglePost() {
         })
     }, [params.postId])
     return (
-        loading ? (<p>loading...</p>) : (<div>
-            <h1>Individual post page</h1>
-            <p>{post.body}</p>
+        loading ? (<p>loading...</p>) : (<div className="container">
+            <Post post={post} setPosts={setPost}/>
             {error && <p>{error}</p>}
         </div>)
         
