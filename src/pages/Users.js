@@ -5,7 +5,7 @@ import UserPreview from '../components/UserPreview'
 
 
 export default function Users() {
-    const {state: {token}} = useAuth()
+    const {state: {token, currentUser}} = useAuth()
     const [loading, setLoading] = useState(true)
     const [users, setUsers] = useState([])
     const [error, setError] = useState("")
@@ -22,7 +22,7 @@ export default function Users() {
         .catch(err => {
             setError(err.message)
         })
-    },[])
+    },[currentUser])
     //TODO:
     return (
         <div className="container">

@@ -43,7 +43,7 @@ export default function Notifications() {
                 <Dropdown.Menu>
                     {notifications.map(n => <Dropdown.Item key={n._id} as={SingleNotification} notification={n}/>)}
                     {notifications.length === 0 && <Dropdown.Item text="You have no notifications"/>}
-                    {notifications.length < 10 && <Dropdown.Item text="View all notifications" as={Link} to="/notifications"/>}
+                    {notifications.length < 10 && notifications.length > 0 && <Dropdown.Item text="View all notifications" as={Link} to="/notifications"/>}
                     {notifications.filter(n => n.seen === false).length > 0 && <Dropdown.Item text="Mark all notifications read" onClick={handleClick} />}
                 </Dropdown.Menu>
             </Dropdown>
