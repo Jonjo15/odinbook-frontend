@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { useAuth } from '../context/authContext'
-
+import {Button} from "semantic-ui-react"
 export default function RegisterLoginForm() {
     const {login, register, fbSignIn, state: {error}} = useAuth()
     const [isLogin, setIsLogin] = useState(true)
@@ -70,7 +70,7 @@ export default function RegisterLoginForm() {
                     appId="130214035599288"
                     callback={responseFacebook}
                     render={renderProps => (
-                        <button onClick={renderProps.onClick}>Sign in with Facebook</button>
+                        <Button color="facebook" content="Sign in with facebook" onClick={renderProps.onClick} />
                     )}
                 />
             {error && <small>{error}</small>}

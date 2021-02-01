@@ -1,5 +1,5 @@
 import React from 'react'
-import {Feed, Button} from "semantic-ui-react"
+import {Feed} from "semantic-ui-react"
 import {Link} from "react-router-dom"
 import dayjs from "dayjs"
 var relativeTime = require('dayjs/plugin/relativeTime')

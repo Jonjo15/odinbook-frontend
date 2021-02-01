@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { useAuth } from '../context/authContext'
 import axios from "axios"
 import {Link} from "react-router-dom"
-
+import {Button} from "semantic-ui-react"
 export default function UserPreview({user, setUsers}) {
     const {updateUser, state: {currentUser, token, loading}} = useAuth()
     const [error, setError] = useState(null)
@@ -64,13 +64,13 @@ export default function UserPreview({user, setUsers}) {
     // console.log("u", user)
     const friendStatusMarkup = currentUser._id === user._id ? null
      :
-      currentUser.friendRequests.includes(user._id) ? (<><button onClick={handleAccept}>Accept</button><button onClick={handleDecline}>Decline</button></>) : currentUser.friends.includes(user._id)
+      currentUser.friendRequests.includes(user._id) ? (<><Button basic color="green" content="Accept" onClick={handleAccept}/><Button basic color="red" content="Decline" onClick={handleDecline} /></>) : currentUser.friends.includes(user._id)
         ? 
      (<p>Friend</p>)
       :
-      user.friendRequests.includes(currentUser._id) ? (<button disabled>Sent</button>) 
+      user.friendRequests.includes(currentUser._id) ? (<Button content="Sent" disabled/>) 
         :
-       (<button onClick={handleRequest}>Send a friend request</button>)
+       (<Button content="Send a friend request" onClick={handleRequest}/>)
     return (
         loading ? <h1>Loading...</h1> :
         <div className="preview-card">
