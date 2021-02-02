@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useAuth } from '../context/authContext'
-import {Card, Icon, Button} from "semantic-ui-react"
-
+import {Card, Icon} from "semantic-ui-react"
+import BioUpdateForm from "../components/BioUpdateForm"
 export default function Profile() {
-    const {state: {currentUser}} = useAuth()
-    const [showForm, setShowForm] = useState(false)
+    const {state: {currentUser, token}} = useAuth()
     //TODO: IMPLEMENT POP UP FORM FOR BIO UPDATE
     const extra = (
         // eslint-disable-next-line
@@ -22,7 +21,7 @@ export default function Profile() {
             description={currentUser.bio ? currentUser.bio : "Update bio"}
             extra={extra}
             />
-            {!showForm && <Button content="Change bio" onClick={() => setShowForm(true)}/>}
+            <BioUpdateForm token={token} />
         </div>
         
     )

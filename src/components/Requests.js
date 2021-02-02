@@ -17,6 +17,7 @@ export default function Requests() {
             setRequests(res.data.requests)
         }).catch(e => {
             setError("Something went wrong with getting friend requests")
+            setRequests([])
         })
     }, [currentUser])
     return (
