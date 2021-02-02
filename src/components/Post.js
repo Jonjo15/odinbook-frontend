@@ -46,7 +46,7 @@ export default function Post({post, setPosts}) {
     }
     return (
         <div className="post-card">
-            <h2>{post.creator.first_name} {post.creator.family_name}</h2>
+            <Link to={"/users/"+ post.creator._id}><h2>{post.creator.first_name} {post.creator.family_name}</h2></Link>
             <p>{post.body}</p>
             <Link to={"posts/" + post._id}><small>{dayjs(post.createdAt).fromNow()}</small></Link>
             <Button

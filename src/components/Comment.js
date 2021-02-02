@@ -1,6 +1,7 @@
 import React from 'react'
 import dayjs from "dayjs"
 import axios from "axios"
+import {Link} from "react-router-dom"
 import { useAuth } from '../context/authContext'
 import {Button} from "semantic-ui-react"
 var relativeTime = require('dayjs/plugin/relativeTime')
@@ -58,7 +59,7 @@ export default function Comment({comment, setPosts}) {
 
     return (
         <div className="comment-card">
-            <h3>{comment.creator.first_name} {comment.creator.family_name}</h3>
+            <Link to={"/users/" + comment.creator._id}><h3>{comment.creator.first_name} {comment.creator.family_name}</h3></Link>
             <p>{comment.body}</p>
             <small>{dayjs(comment.createdAt).fromNow()}</small>
             <Button
