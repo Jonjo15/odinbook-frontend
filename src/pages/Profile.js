@@ -2,6 +2,7 @@ import React from 'react'
 import { useAuth } from '../context/authContext'
 import {Card, Icon} from "semantic-ui-react"
 import BioUpdateForm from "../components/BioUpdateForm"
+import ProfilePicChange from '../components/ProfilePicChange'
 export default function Profile() {
     const {state: {currentUser, token}} = useAuth()
     //TODO: IMPLEMENT POP UP FORM FOR BIO UPDATE
@@ -21,6 +22,7 @@ export default function Profile() {
             description={currentUser.bio ? currentUser.bio : "Update bio"}
             extra={extra}
             />
+            <ProfilePicChange token={token}/>
             <BioUpdateForm token={token} />
         </div>
         
