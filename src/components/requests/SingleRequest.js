@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Card, Button} from "semantic-ui-react"
 import axios from "axios"
-import { useAuth } from '../context/authContext'
+import { useAuth } from '../../context/authContext'
 export default function SingleRequest({request, setRequests}) {
     const {updateUser, state: {token}} = useAuth()
     const [error, setError] = useState("")

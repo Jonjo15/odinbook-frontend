@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react'
 import { useAuth } from '../context/authContext'
 import axios from "axios";
 import {Redirect} from "react-router-dom"
-import Post from "../components/Post"
-import NewPostForm from '../components/NewPostForm';
+import Post from "../components/post/Post"
+import NewPostForm from '../components/post/NewPostForm';
 import {Button} from "semantic-ui-react"
 
 export default function Home() {

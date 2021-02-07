@@ -2,7 +2,7 @@ import React from 'react'
 import dayjs from "dayjs"
 import axios from "axios"
 import {Link} from "react-router-dom"
-import { useAuth } from '../context/authContext'
+import { useAuth } from '../../context/authContext'
 import {Button} from "semantic-ui-react"
 var relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)

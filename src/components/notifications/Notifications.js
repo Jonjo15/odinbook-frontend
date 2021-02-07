@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import SingleNotification from "./SingleNotification"
-import { useAuth } from '../context/authContext'
+import { useAuth } from '../../context/authContext'
 import axios from "axios"
 import {Link} from "react-router-dom"
 import { Dropdown } from 'semantic-ui-react'

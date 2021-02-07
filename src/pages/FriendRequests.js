@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from "axios"
 import { useAuth } from '../context/authContext'
-import SingleRequest from "../components/SingleRequest"
+import SingleRequest from "../components/requests/SingleRequest"
 
 export default function FriendRequests() {
     const {state: {currentUser, token}} = useAuth()

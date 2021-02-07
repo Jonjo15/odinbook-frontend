@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from "axios"
 import { useAuth } from '../context/authContext'
-import SingleNotification from "../components/SingleNotification"
+import SingleNotification from "../components/notifications/SingleNotification"
 export default function NotificationsPage() {
     const {state: {token}} = useAuth()
     const [loading, setLoading] = useState(true)

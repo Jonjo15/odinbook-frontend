@@ -3,7 +3,7 @@ import axios from "axios"
 import {useParams} from "react-router-dom"
 import { useAuth } from '../context/authContext'
 import {Card} from "semantic-ui-react"
-import Post from "../components/Post"
+import Post from "../components/post/Post"
 import NoImg from "../images/no-image.png"
 
 export default function UserProfile() {

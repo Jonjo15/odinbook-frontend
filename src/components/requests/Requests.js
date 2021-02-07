@@ -3,7 +3,7 @@ import {Dropdown} from "semantic-ui-react"
 import {Link} from "react-router-dom"
 import SingleRequest from "./SingleRequest"
 import axios from "axios"
-import { useAuth } from '../context/authContext'
+import { useAuth } from '../../context/authContext'
 
 export default function Requests() {
     const {state: {token, currentUser}} = useAuth()

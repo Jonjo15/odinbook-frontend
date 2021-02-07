@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import Comment from "./Comment"
 import dayjs from "dayjs"
 import {Link} from "react-router-dom"
-import { useAuth } from '../context/authContext'
+import { useAuth } from '../../context/authContext'
 import {Button} from "semantic-ui-react"
 import axios from "axios"
 import NewCommentForm from './NewCommentForm'

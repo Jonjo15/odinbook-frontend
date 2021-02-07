@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { Button, Form, Modal } from 'semantic-ui-react'
 import axios from "axios"
-import { useAuth } from '../context/authContext'
+import { useAuth } from '../../context/authContext'
 
 function exampleReducer(state, action) {
   switch (action.type) {
