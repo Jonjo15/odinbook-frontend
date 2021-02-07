@@ -41,7 +41,7 @@ export default function ProfilePicChange({token}) {
         e.preventDefault()
         console.log("submit")
         if(!file) return
-
+        //TODO: FINISH
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = () => {
@@ -51,20 +51,33 @@ export default function ProfilePicChange({token}) {
             console.error('AHHHHHHHH!!');
             setError('something went wrong!');
         };
+        // let formData = new FormData();
+        // formData.append('file', file);
+        // formData.append('upload_preset', "moxqjptj");
+        // try {
+            
+        //     const response = await axios.post("https://api.cloudinary.com/v1_1/jonjo15/image/upload", formData)
+        //     console.log(response)
+        // } catch (error) {
+        //     console.error(error)
+        //     setError("Something went wrong")
+        // }
+        
+    
         
     }
     const uploadImage = async (base64EncodedImage) => {
-        console.log(base64EncodedImage)
         try {
             const res = await axios.put("http://localhost:5000/users/profile_picture", {data: base64EncodedImage})
+            console.log(res.data)
            //  console.log(res.data)
            //  const payload = {user: res.data.response}
-            updateUser(res.data.response)
+            updateUser(res.data.user)
             setFile(null)
             dispatch({ type: 'close' })
             
          } catch (error) {
-             setError("Something went wrong")
+             setError(error.message)
              setFile(null)
              dispatch({ type: 'close' })
              
