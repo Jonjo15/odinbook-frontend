@@ -7,7 +7,7 @@ import NewPostForm from '../components/post/NewPostForm';
 import {Button} from "semantic-ui-react"
 
 export default function Home() {
-    const {state: {authenticated, currentUser, token}} = useAuth()
+    const {state: {authenticated, token}} = useAuth()
     const [posts, setPosts] = useState([])
     const [error, setError] = useState(null)
     const [showForm, setShowForm] = useState(false)
@@ -22,9 +22,8 @@ export default function Home() {
     }, [token])
     return authenticated ? (
         <div className="container">
-            <h1>Home Page</h1>
-            <p>.....{JSON.stringify(currentUser)}</p>
-            {!showForm && <Button icon="add" onClick={() => setShowForm(true)} />}
+            <h1 >Home Page</h1>
+            {!showForm && <Button className="mb-50" icon="add" onClick={() => setShowForm(true)} />}
             {showForm && <NewPostForm setPosts={setPosts} setShowForm={setShowForm}/>}
             {posts.map(post => <Post key={post._id} post={post} setPosts={setPosts}/>)}
             {error && <p>{error}</p>}

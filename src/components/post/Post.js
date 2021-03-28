@@ -49,25 +49,23 @@ export default function Post({post, setPosts}) {
             <Link to={"/users/"+ post.creator._id}><h2>{post.creator.first_name} {post.creator.family_name}</h2></Link>
             <p>{post.body}</p>
             <Link to={"posts/" + post._id}><small>{dayjs(post.createdAt).fromNow()}</small></Link>
-            <Button
-            content={post.likes.includes(currentUser._id) ? " Unlike": "Like"}
-            icon='heart'
-            label={{ as: 'a', basic: true, content: post.likes.length }}
-            labelPosition='right'
-            onClick={handleLike}
-            />
-            {/* <button onClick={handleLike}>{post.likes.includes(currentUser._id) ? " Unlike": "Like"}</button> */}
-            {/* <span>{post.likes.length} {post.likes.length === 1 ? "like": "likes"}</span> */}
-            {/* <p>{currentUser.id}</p>
-            <p>{post.creator._id}</p> */}
-            {/* button onClick={() => setShowForm(true)}>Add a comment</button> */}
-            {!showForm && (<Button 
-                icon="comments"
-                onClick={() => setShowForm(true)}
-            />)}
-            {showForm && <NewCommentForm setPosts={setPosts} setShowForm={setShowForm} postId={post._id}/>}
-            {currentUser._id === post.creator._id ? (<Button icon="delete" onClick={handleClick}/>): null}
-            {post.comments.map(com => <Comment key={com._id} comment={com} setPosts={setPosts}/>)}
+            <div className="button-grid">
+                <Button
+                content={post.likes.includes(currentUser._id) ? " Unlike": "Like"}
+                icon='heart'
+                label={{ as: 'a', basic: true, content: post.likes.length }}
+                labelPosition='right'
+                onClick={handleLike}
+                />
+                {!showForm && (<Button 
+                                icon="comments"
+                                onClick={() => setShowForm(true)}
+                                />)}
+                {showForm && <NewCommentForm setPosts={setPosts} setShowForm={setShowForm} postId={post._id}/>}
+                {currentUser._id === post.creator._id ? (<Button icon="delete" onClick={handleClick}/>): null}
+                {post.comments.map(com => <Comment key={com._id} comment={com} setPosts={setPosts}/>)}
+            </div>
+            
         </div>
     )
 }

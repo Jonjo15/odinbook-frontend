@@ -24,6 +24,19 @@ a {
   padding: 15px;
   text-align: center;
 }
+.center {
+  display: flex !important;
+  margin-right: 10px;
+  margin-left: 10px;
+  justify-content: space-around;
+  align-items: center;
+}
+.dropdown i {
+  padding: 0 5px;
+}
+.mb-50 {
+  margin-bottom: 50px;
+}
 .form-container {
   max-width: 60%;
   margin: 0 auto;

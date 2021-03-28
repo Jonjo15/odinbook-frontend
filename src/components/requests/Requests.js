@@ -21,8 +21,8 @@ export default function Requests() {
         })
     }, [currentUser])
     return (
-        <div>
-            <Dropdown text={(currentUser.friendRequests.length).toString()} icon="handshake outline">
+        <>
+            <Dropdown className="center" style={{color: "#fafafa", opacity: 0.9}} text={(currentUser.friendRequests.length).toString()} icon="handshake outline">
                 <Dropdown.Menu>
                     {requests.map(r => <Dropdown.Item key={r._id} as={SingleRequest} setRequests={setRequests} request={r}/>)}
                     {requests.length === 0 && <Dropdown.Item text="You have no friend Requests"/>}
@@ -31,6 +31,6 @@ export default function Requests() {
             </Dropdown>
             {/* {requests.map(n => <a href="#" key={n._id}>{n._id}</a>)} */}
             {error && <span>{error}</span>}
-        </div>
+        </>
     )
 }

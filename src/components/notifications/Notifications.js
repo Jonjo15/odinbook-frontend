@@ -38,8 +38,8 @@ export default function Notifications() {
     }
 
     return (
-        <div>
-            <Dropdown text={(notifications.filter(n => n.seen === false).length).toString()} icon="alarm">
+        <>
+            <Dropdown className="center" style={{color: "#fafafa", opacity: 0.9}} text={(notifications.filter(n => n.seen === false).length).toString()} icon="alarm">
                 <Dropdown.Menu>
                     {notifications.map(n => <Dropdown.Item key={n._id} as={SingleNotification} notification={n}/>)}
                     {notifications.length === 0 && <Dropdown.Item text="You have no notifications"/>}
@@ -49,6 +49,6 @@ export default function Notifications() {
             </Dropdown>
             {/* {notifications.map(n => <a href="#" key={n._id}>{n._id}</a>)} */}
             {error && <span>{error}</span>}
-        </div>
+        </>
     )
 }
